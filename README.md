@@ -32,7 +32,7 @@ i made bark illegal ehehehe
 These modules can be useful for exploring the game world, experimenting with gameplay mechanics, or just having fun with friends. They are **kinda but not really** meant to be used to harass others, which can result in a ban from the game.
 
 ## Usage
-When you start the game, press the right primary button (Index: B, Oculus: A). This will summon the interface in front of you. To hide the interface, simply grab it and throw it away.
+When you start the game, press the right primary button (Index: B, Oculus: A) and tap your chess with that same hand. This will summon the interface in front of you. To hide the interface, simply grab it and throw it away.
 
 ## Installation
 To use *BarkX*, you don't need to have [Monke Mod Manager](https://github.com/DeadlyKitten/MonkeModManager/releases) installed but it is suggested. Make sure to check Utilla. Once you have installed the mod loader, simply drop the `BarkX.dll` file into your plugins folder.
