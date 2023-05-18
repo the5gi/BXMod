@@ -137,14 +137,12 @@ namespace Bark.Modules.Multiplayer
         void EnableNoClip()
         {
             var noclip = Plugin.menuController.GetComponent<NoCollide>();
-            noclip.button.AddBlocker(ButtonController.Blocker.PIGGYBACKING);
             noclip.enabled = true;
         }
 
         void DisableNoClip()
         {
             var noclip = Plugin.menuController.GetComponent<NoCollide>();
-            noclip.button.RemoveBlocker(ButtonController.Blocker.PIGGYBACKING);
             noclip.enabled = false;
         }
 
@@ -155,14 +153,11 @@ namespace Bark.Modules.Multiplayer
             {
                 if (GivingConsent(closest.rig))
                 {
-                    if (!PositionValidator.Instance.isValidAndStable)
-                    {
-                        GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(68, false, 1f);
-                        return false;
-                    }
-                    Mount(closest.transform, closest.rig);
-                    return true;
+                    GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(68, false, 1f);
+                    return false;
                 }
+                Mount(closest.transform, closest.rig);
+                return true;
             }
             return false;
         }

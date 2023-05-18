@@ -92,7 +92,6 @@ namespace Bark.Modules.Movement
         {
             float transparency = (Time.time - spawnTime) / 1f;
             material.color = new Color(1, 1, 1, Mathf.Lerp(1, 0, transparency));
-            platform.layer = NoCollide.active ? NoCollide.layer : 0;
         }
 
         protected override void Cleanup()

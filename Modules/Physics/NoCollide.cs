@@ -7,72 +7,62 @@ using GorillaLocomotion;
 using UnityEngine;
 using Bark.Modules.Multiplayer;
 using Bark.Modules.Movement;
+using UnityEngine.XR;
 
 namespace Bark.Modules.Physics
 {
     public class NoCollide : BarkModule
     {
-        public static NoCollide Instance;
+        private bool leftTriggerDown = false;
+        private bool noClipOn = false;
+        void FixedUpdate()
+        { 
+            if (this.enabled)
+            {
+                InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+                bool leftTrigger;
+                bool temp2 = leftController.TryGetFeatureValue(CommonUsages.triggerButton, out leftTrigger);
+                if (leftTriggerDown && leftTrigger)
+                {
+                    return;
+                }
+                else if (leftTriggerDown && !leftTrigger)
+                {
+                    leftTriggerDown = false;
+                }
 
-        private LayerMask baseMask;
-        private bool baseHeadIsTrigger, baseBodyIsTrigger;
-        public static bool active;
-        public static int layer = 29, layerMask = 1 << layer;
-        private Vector3 activationLocation;
-        private float activationAngle;
-
-        private struct GorillaTriggerInfo
-        {
-            public Collider collider;
-            public bool wasEnabled;
+                if (leftTrigger && !noClipOn)
+                {
+                    foreach (MeshCollider meshCollider in Resources.FindObjectsOfTypeAll<MeshCollider>())
+                    {
+                        meshCollider.transform.localScale = meshCollider.transform.localScale / 10000f;
+                    }
+                    leftTriggerDown = true;
+                    noClipOn = true;
+                }
+                else if (!leftTrigger && noClipOn)
+                {
+                    foreach (MeshCollider meshCollider in Resources.FindObjectsOfTypeAll<MeshCollider>())
+                    {
+                        meshCollider.transform.localScale = meshCollider.transform.localScale * 10000f;
+                    }
+                    noClipOn = false;
+                }
+            }
         }
-
-        void Awake() { Instance = this; }
 
         protected override void OnEnable()
         {
-            try
-            {
-                if (!MenuController.Instance.Built) return;
-                base.OnEnable();
-                Logging.LogDebug("Disabling triggers");
-                activationLocation = Player.Instance.bodyCollider.transform.position;
-                activationAngle = Player.Instance.bodyCollider.transform.eulerAngles.y;
-                if (!Piggyback.mounted)
-                {
-                    try
-                    {
-                        foreach (var platformModule in Plugin.menuController.GetComponents<Platforms>())
-                        {
-                            platformModule.enabled = true;
-                        }
-                    }
-                    catch
-                    {
-                        Logging.LogDebug("Failed to enable platforms for noclip.");
-                    }
-                }
-
-                TriggerBoxPatches.triggersEnabled = false;
-                baseMask = Player.Instance.locomotionEnabledLayers;
-                Player.Instance.locomotionEnabledLayers = layerMask;
-
-                baseBodyIsTrigger = Player.Instance.bodyCollider.isTrigger;
-                Player.Instance.bodyCollider.isTrigger = true;
-
-                baseHeadIsTrigger = Player.Instance.headCollider.isTrigger;
-                Player.Instance.headCollider.isTrigger = true;
-                active = true;
-            }
-            catch (Exception e) { Logging.LogException(e); }
+            if (!MenuController.Instance.Built) return;
+            base.OnEnable();
         }
 
         protected override void Cleanup() 
         {
-            StartCoroutine(CleanupRoutine());
-        }
+            //StartCoroutine(CleanupRoutine());
+        } 
 
-        IEnumerator CleanupRoutine()
+        /*IEnumerator CleanupRoutine()
         {
             Logging.LogDebug("Cleaning up noclip");
 
@@ -86,11 +76,11 @@ namespace Bark.Modules.Physics
             yield return new WaitForFixedUpdate();
             TriggerBoxPatches.triggersEnabled = true;
             Logging.LogDebug("Enabling triggers");
-        }
+        }*/
 
         public override string DisplayName()
         {
-            return "No Collide";
+            return "NoClip";
         }
 
         public override string Tutorial()

@@ -33,7 +33,6 @@ namespace Bark.Modules
                 window = new GameObject("Teleport Window").transform;
                 windowCollider = window.gameObject.AddComponent<SphereCollider>();
                 windowCollider.isTrigger = true;
-                window.gameObject.layer = NoCollide.layer;
                 poly = window.gameObject.AddComponent<DebugPoly>();
                 GestureTracker.Instance.OnIlluminati += OnIlluminati;
             } catch (Exception e) { Logging.LogException(e); }

@@ -6,13 +6,12 @@ namespace Bark.Modules
     public class Speed : BarkModule
     {
         public static float baseVelocityLimit, scale;
-        public float _scale = 1.5f;
+        public float _scale = 1.25f;
         public static bool active = false;
 
         void FixedUpdate()
         {
-            var gameMode = GorillaGameManager.instance.GameMode();
-            if (active && (gameMode == "NONE" || gameMode == "CASUAL"))
+            if (this.enabled)
             {
                 Player.Instance.jumpMultiplier = 1.3f * _scale;
                 Player.Instance.maxJumpSpeed = 8.5f * _scale;
@@ -23,7 +22,6 @@ namespace Bark.Modules
         {
             if (!MenuController.Instance.Built) return;
             base.OnEnable();
-            active = true;
             scale = _scale;
             baseVelocityLimit =  Player.Instance.velocityLimit;
             Player.Instance.velocityLimit = baseVelocityLimit * scale;
@@ -31,12 +29,7 @@ namespace Bark.Modules
 
         protected override void Cleanup()
         {
-            if (active)
-            {
-                scale = 1;
-                Player.Instance.velocityLimit = baseVelocityLimit;
-                active = false;
-            }
+            return;
         }
 
         public override string DisplayName()

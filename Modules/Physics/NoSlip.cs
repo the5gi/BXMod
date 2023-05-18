@@ -1,8 +1,5 @@
 ﻿using Bark.GUI;
 using Bark.Patches;
-using GorillaLocomotion;
-using UnityEngine;
-
 namespace Bark.Modules.Physics
 {
     public class NoSlip: BarkModule
@@ -26,7 +23,7 @@ namespace Bark.Modules.Physics
 
         public override string DisplayName()
         {
-            return "No Slip";
+            return "GripMonke";
         }
 
         public override string Tutorial()

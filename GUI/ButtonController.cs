@@ -11,19 +11,16 @@ public class ButtonController : XRBaseInteractable
 {
     public enum Blocker
     {
-        MENU_FALLING, NOCLIP_BOUNDARY, PIGGYBACKING, BUTTON_PRESSED
+        MENU_FALLING, BUTTON_PRESSED
     }
 
     private Dictionary<Blocker, string> blockerText = new Dictionary<Blocker, string>()
     {
         {Blocker.MENU_FALLING, ""},
-        {Blocker.NOCLIP_BOUNDARY, "YOU ARE TOO CLOSE TO A WALL TO ACTIVATE THIS"},
-        {Blocker.PIGGYBACKING, $"NO COLLIDE CANNOT BE TOGGLED WHILE PIGGYBACK IS ACTIVE"},
         {Blocker.BUTTON_PRESSED, ""},
     };
 
     private float buttonPushDistance = 0.03f; // Distance the button travels when pushed
-    private Vector3 buttonRestPosition; // Initial position of the button
     public Action<ButtonController, bool> OnPressed;
     private float cooldown = .1f, lastPressed = 0;
     public Canvas canvas;

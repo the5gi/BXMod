@@ -41,7 +41,6 @@ namespace Bark.GUI
                 Logging.LogDebug("Awake");
                 base.Awake();
 
-                gameObject.AddComponent<PositionValidator>();
                 var tracker = gameObject.AddComponent<GestureTracker>();
                 tracker.OnMeatBeat += () =>
                 {
@@ -54,15 +53,17 @@ namespace Bark.GUI
                 modules = new List<BarkModule>()
                 {
                     // Locomotion
-                    gameObject.AddComponent<Airplane>(),
+                    //SuperMan was something i modified to have better flying
+                    gameObject.AddComponent<SuperMan>(),
+                    gameObject.AddComponent<FlySpeedControl>(),
                     gameObject.AddComponent<GrapplingHooks>(),
+                    gameObject.AddComponent<Speed>(),
                     gameObject.AddComponent<Platforms>().Left(),
                     gameObject.AddComponent<Platforms>().Right(),
-                    gameObject.AddComponent<Speed>(),
-                    gameObject.AddComponent<Wallrun>(),
 
                     //// Physics
                     gameObject.AddComponent<Freeze>(),
+                    //Removed, Will change
                     gameObject.AddComponent<LowGravity>(),
                     gameObject.AddComponent<NoCollide>(),
                     gameObject.AddComponent<NoSlip>(),
@@ -76,13 +77,13 @@ namespace Bark.GUI
                     gameObject.AddComponent<Boxing>(),
                     gameObject.AddComponent<Piggyback>(),
                     gameObject.AddComponent<XRay>(),
-                };
 
-                if (PhotonNetwork.LocalPlayer.NickName.ToUpper() == "THERATTIDEVR")
-                {
-                    modules.Add(gameObject.AddComponent<RatSword>());
-                }
-
+                    //Custom
+                    gameObject.AddComponent<Disconnect>(),
+                    gameObject.AddComponent<Invisible>(),
+                    gameObject.AddComponent<FirstPersonCamera>(),
+            };
+                
             }
             catch (Exception e) { Logging.LogException(e); }
         }
@@ -106,15 +107,16 @@ namespace Bark.GUI
             }
         }
 
-        void BuildMenu()
+        public void BuildMenu()
         {
             Logging.LogDebug("Building menu...");
             try
             {
                 helpText = this.gameObject.transform.Find("Help Canvas").GetComponentInChildren<Text>();
-                helpText.text = "Enable a module to see its tutorial.";
+                helpText.text = "BarkX by 5gi, Enabled a module to see it's effects.";
+                this.gameObject.transform.Find("Version Canvas").GetComponentInChildren<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
                 this.gameObject.transform.Find("Version Canvas").GetComponentInChildren<Text>().text =
-                    $"{PluginInfo.Name} {PluginInfo.Version}";
+                    "BarkX by 5gi";
 
                 var collider = this.gameObject.AddComponent<BoxCollider>();
                 _rigidbody = gameObject.GetComponent<Rigidbody>();

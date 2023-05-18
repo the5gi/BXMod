@@ -73,7 +73,7 @@ namespace Bark.Modules.Multiplayer
 
         public override string DisplayName()
         {
-            return "X-Ray";
+            return "ESP";
         }
 
         public override string Tutorial()

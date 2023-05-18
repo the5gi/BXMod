@@ -43,7 +43,7 @@ namespace Bark.Modules.Teleportation
 
         void LeftTriggered()
         {
-            if (enabled && !NoCollide.active)
+            if (enabled)
                 StartCoroutine(GrowBananas());
         }
 
@@ -58,7 +58,7 @@ namespace Bark.Modules.Teleportation
         {
             checkpointMarker.gameObject.SetActive(true);
             float startTime = Time.time;
-            while (GestureTracker.Instance.leftTriggered && !NoCollide.active)
+            while (GestureTracker.Instance.leftTriggered)
             {
                 float scale = Mathf.Lerp(0, Player.Instance.scale, (Time.time - startTime) / 2f);
                 checkpointMarker.position = Player.Instance.leftHandTransform.position + Vector3.up * .15f * Player.Instance.scale;

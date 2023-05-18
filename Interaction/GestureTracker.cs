@@ -1,13 +1,16 @@
 ﻿using Bark.Extensions;
+using Bark.GUI;
 using Bark.Modules;
 using Bark.Tools;
 using GorillaLocomotion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using static OVRManager;
 
 namespace Bark.Gestures
 {
@@ -85,9 +88,12 @@ namespace Bark.Gestures
 
         void FixedUpdate()
         {
+            leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+            rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
             // If it's been more than one second since you last beat your chest, 
             if (Time.time - lastBeat > 1f)
                 meatBeatCollisions.Clear();
+
         }
 
         void Update()
@@ -235,23 +241,16 @@ namespace Bark.Gestures
 
         void OnChestBeat(GameObject obj, Collider collider)
         {
-            lastBeat = Time.time;
-            if (meatBeatCollisions.Count > 3)
-                meatBeatCollisions.Dequeue();
-            if (collider.gameObject == leftHand)
-                meatBeatCollisions.Enqueue(0);
-            else if (collider.gameObject == rightHand)
-                meatBeatCollisions.Enqueue(1);
-            if (meatBeatCollisions.Count < 4) return;
-            int current, last = -1;
-            for (int i = 0; i < meatBeatCollisions.Count; i++)
+            if (collider.gameObject == rightHand)
             {
-                current = meatBeatCollisions.ElementAt(i);
-                if (last == current) return;
-                last = current;
+                bool rightHandPrimary = false;
+                bool tempState = rightController.TryGetFeatureValue(CommonUsages.primaryButton, out rightHandPrimary);
+                if (rightHandPrimary)
+                {
+                    meatBeatCollisions.Clear();
+                    OnMeatBeat?.Invoke();
+                }
             }
-            meatBeatCollisions.Clear();
-            OnMeatBeat?.Invoke();
         }
 
         void BuildColliders()
