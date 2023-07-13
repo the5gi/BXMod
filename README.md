@@ -37,7 +37,7 @@ These modules can be useful for exploring the game world, experimenting with gam
 When you start the game, press the right primary button (Index: B, Oculus: A) and tap your chess with that same hand. This will summon the interface in front of you. To hide the interface, simply grab it and throw it away.
 
 ## Installation
-To use *BarkX*, you don't need to have [Monke Mod Manager](https://github.com/DeadlyKitten/MonkeModManager/releases) installed but it is suggested. Make sure to check Utilla. Once you have installed the mod loader, simply drop the `BarkX.dll` file into your plugins folder.
+To use *BarkX*, you don't need to have [Monke Mod Manager](https://github.com/DeadlyKitten/MonkeModManager/releases) installed but it is suggested. Make sure to check Utilla. Once you have installed the mod loader, simply drop the `BarkX-V*version*-PUBLIC.dll` file into your plugins folder.
 
 ![Installation GIF](https://github.com/the5gi/Bark/blob/master/Marketing/HowToInstall.gif)
 
