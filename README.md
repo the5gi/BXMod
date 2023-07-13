@@ -46,13 +46,13 @@ To use *BarkX*, you don't need to have [Monke Mod Manager](https://github.com/De
 While *BarkX* is designed to work anywhere, it is important to note that using mods in any form in public lobbies can result in a ban from the game. Use *BarkX* at your own risk.
 
 ## Bugs and issues
-If you encounter any bugs or issues while using *Bark*, please report them on THIS MODS PAGE. DO NOT FLOOD THE OFFICIAL BARK's ISSUES SECTION IF IT IS A CUSTOM MODULE. 
+If you encounter any bugs or issues while using *BarkX*, please report them on THIS MODS PAGE. DO NOT FLOOD THE OFFICIAL BARK's ISSUES SECTION IF IT IS A CUSTOM MODULE. 
 
 ## Contributing
 If you would like to contribute to *BarkX*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
 
 ## Credits
 *Bark* was created by KyleTheScientist.
-*BarkX* is an adaptation of *Bark*
+*BarkX* is an adaptation of *Bark* by KyleTheScientist.
 
 * [Boxing Gloves model](https://skfb.ly/6XOUS) by Gohar.Munir is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
