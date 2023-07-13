@@ -43,7 +43,7 @@ namespace Bark.Modules.Multiplayer
         {
             foreach (var rig in GorillaParent.instance.vrrigs)
             {
-                if (rig.photonView.Owner.IsLocal) continue;
+                if (rig.myPlayer.IsLocal) continue;
 
                 var marker = rig.gameObject.GetComponent<XRayMarker>();
                 if (marker)

@@ -75,7 +75,7 @@ namespace Bark.Modules.Movement
 
         public Platforms Left()
         {
-            hand = Player.Instance.leftHandTransform;
+            hand = Player.Instance.leftControllerTransform;
             xrNode = XRNode.LeftHand;
 
             return this;
@@ -83,7 +83,7 @@ namespace Bark.Modules.Movement
 
         public Platforms Right()
         {
-            hand = Player.Instance.rightHandTransform;
+            hand = Player.Instance.rightControllerTransform;
             xrNode = XRNode.RightHand;
             return this;
         }

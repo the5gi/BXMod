@@ -78,7 +78,7 @@ namespace Bark.Modules.Multiplayer
             float closestDistance = Mathf.Infinity;
             foreach (var rig in GorillaParent.instance.vrrigs)
             {
-                if (rig.photonView.Owner.IsLocal)
+                if (rig.myPlayer.IsLocal)
                 {
                     continue;
                 }

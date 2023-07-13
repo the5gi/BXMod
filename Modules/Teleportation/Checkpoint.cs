@@ -61,7 +61,7 @@ namespace Bark.Modules.Teleportation
             while (GestureTracker.Instance.leftTriggered)
             {
                 float scale = Mathf.Lerp(0, Player.Instance.scale, (Time.time - startTime) / 2f);
-                checkpointMarker.position = Player.Instance.leftHandTransform.position + Vector3.up * .15f * Player.Instance.scale;
+                checkpointMarker.position = Player.Instance.leftControllerTransform.position + Vector3.up * .15f * Player.Instance.scale;
                 checkpointMarker.localScale = Vector3.one * scale;
                 if (Mathf.Abs(scale - Player.Instance.scale) < .01f)
                 {
@@ -96,7 +96,7 @@ namespace Bark.Modules.Teleportation
             Vector3 startPos, endPos;
             while (GestureTracker.Instance.rightTriggered && pointSet)
             {
-                startPos = Player.Instance.rightHandTransform.position;
+                startPos = Player.Instance.rightControllerTransform.position;
                 bananaLine.SetPosition(1, startPos);
                 endPos = Vector3.Lerp(startPos, checkpointMarker.transform.position, (Time.time - startTime) / 2f);
                 bananaLine.SetPosition(0, endPos);

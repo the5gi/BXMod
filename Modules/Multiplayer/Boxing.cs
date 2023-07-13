@@ -32,7 +32,7 @@ namespace Bark.Modules.Multiplayer
             {
                 foreach (var rig in GorillaParent.instance.vrrigs)
                 {
-                    if (rig.photonView.Owner.IsLocal ||
+                    if (rig.myPlayer.IsLocal ||
                         rig.gameObject.GetComponent<BoxingMarker>()) continue;
 
                     markers.Add(rig.gameObject.AddComponent<BoxingMarker>());
