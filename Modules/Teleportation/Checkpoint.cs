@@ -37,7 +37,7 @@ namespace Bark.Modules.Teleportation
             }
             catch (Exception e)
             {
-                Logging.LogException(e);
+                Logging.Exception(e);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Bark.Modules.Teleportation
                 GestureTracker.Instance.OnLeftTriggerPressed += LeftTriggered;
                 GestureTracker.Instance.OnRightTriggerPressed += RightTriggered;
             }
-            catch (Exception e) { Logging.LogException(e); }
+            catch (Exception e) { Logging.Exception(e); }
         }
 
 

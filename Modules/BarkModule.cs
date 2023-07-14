@@ -4,6 +4,8 @@ namespace Bark.Modules
 {
     public abstract class BarkModule : MonoBehaviour
     {
+        protected virtual void ReloadConfiguration() { }
+
         public abstract string DisplayName();
         public abstract string Tutorial();
         public ButtonController button;

@@ -69,7 +69,7 @@ public class ButtonController : XRBaseInteractable
             observer.OnTriggerEntered += Press;
             observer.OnTriggerExited += Unpress;
         }
-        catch (Exception e) { Logging.LogException(e); }
+        catch (Exception e) { Logging.Exception(e); }
     }
     protected void Press(GameObject self, Collider collider)
     {
@@ -93,7 +93,7 @@ public class ButtonController : XRBaseInteractable
             Invoke(nameof(RemoveCooldownBlocker), .1f);
             buttonModel.localPosition = Vector3.up * -buttonPushDistance;
         }
-        catch (Exception e) { Logging.LogException(e); }
+        catch (Exception e) { Logging.Exception(e); }
     }
 
     protected void Unpress(GameObject self, Collider collider)
@@ -125,7 +125,7 @@ public class ButtonController : XRBaseInteractable
             Interactable = false;
             blockers.Add(blocker);
         }
-        catch (Exception e) { Logging.LogException(e); }
+        catch (Exception e) { Logging.Exception(e); }
     }
 
     public void RemoveBlocker(Blocker blocker)
@@ -138,6 +138,6 @@ public class ButtonController : XRBaseInteractable
                 Interactable = blockers.Count == 0;
             }
         }
-        catch (Exception e) { Logging.LogException(e); }
+        catch (Exception e) { Logging.Exception(e); }
     }
 }

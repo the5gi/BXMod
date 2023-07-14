@@ -32,7 +32,7 @@ namespace Bark.Modules.Multiplayer
             {
                 foreach (var rig in GorillaParent.instance.vrrigs)
                 {
-                    if (rig.myPlayer.IsLocal ||
+                    if (rig.gameObject.Equals(Plugin.getLocalRig().gameObject) ||
                         rig.gameObject.GetComponent<BoxingMarker>()) continue;
 
                     markers.Add(rig.gameObject.AddComponent<BoxingMarker>());
@@ -42,7 +42,7 @@ namespace Bark.Modules.Multiplayer
             }
             catch (Exception e)
             {
-                Logging.LogException(e);
+                Logging.Exception(e);
             }
         }
 
@@ -113,7 +113,7 @@ namespace Bark.Modules.Multiplayer
 
                 observer.OnTriggerExited += (obj, collider) =>
                 {
-                    Logging.LogDebug(collider.name);
+                    Logging.Debug(collider.name);
                     if (collider.name != "MM Glove") return;
                     if (collider == tracker.collider)
                         tracker = null;
@@ -123,7 +123,7 @@ namespace Bark.Modules.Multiplayer
             }
             catch (Exception e)
             {
-                Logging.LogException(e);
+                Logging.Exception(e);
             }
         }
 

@@ -1,11 +1,66 @@
 ﻿using Bark.Extensions;
 using Bark.GUI;
 using Bark.Tools;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bark.Modules.Multiplayer
 {
+
+    public class XRay : BarkModule
+    {
+        public static readonly string displayName = "ESP";
+        List<XRayMarker> markers;
+        void ApplyMaterial()
+        {
+            foreach (var rig in GorillaParent.instance.vrrigs)
+            {
+                try
+                {
+                    var marker = rig.gameObject.GetComponent<XRayMarker>();
+                    if (marker)
+                        marker.Update();
+                    else
+                        markers.Add(rig.gameObject.AddComponent<XRayMarker>());
+                }
+                catch (Exception e)
+                {
+                    Logging.Exception(e);
+                    Logging.Debug("rig is null:", rig is null);
+                }
+            }
+        }
+        void FixedUpdate()
+        {
+            if (Time.frameCount % 300 == 0) ApplyMaterial();
+        }
+        protected override void OnEnable()
+        {
+            if (!MenuController.Instance.Built) return;
+            base.OnEnable();
+            markers = new List<XRayMarker>();
+            ApplyMaterial();
+        }
+
+        protected override void Cleanup()
+        {
+            if (!MenuController.Instance.Built) return;
+            foreach (var marker in markers)
+                marker?.Obliterate();
+        }
+
+        public override string DisplayName()
+        {
+            return displayName;
+        }
+        public override string Tutorial()
+        {
+            return "Effect: Allows you to see other players through walls.";
+        }
+
+    }
+
     public class XRayMarker : MonoBehaviour
     {
         Material baseMaterial, material;
@@ -22,7 +77,14 @@ namespace Bark.Modules.Multiplayer
             if (!rig.mainSkin.material.name.Contains("X-Ray"))
             {
                 baseMaterial = rig.mainSkin.material;
-                material.color = baseMaterial.color;
+
+                if (rig.mainSkin.material.name.Contains("infected")) {
+                    material.color = new Color(0.18039215686f, 0.03529411764f, 0.03529411764f); 
+                }
+                else
+                {
+                    material.color = baseMaterial.color;
+                }
                 material.mainTexture = baseMaterial.mainTexture;
                 material.SetTexture("_MainTex", baseMaterial.mainTexture);
                 rig.mainSkin.material = material;
@@ -32,54 +94,7 @@ namespace Bark.Modules.Multiplayer
         void OnDestroy()
         {
             rig.mainSkin.material = baseMaterial;
-            Logging.LogDebug($"Reset material to {baseMaterial.name}");
+            Logging.Debug($"Reset material to {baseMaterial.name}");
         }
-    }
-
-    public class XRay : BarkModule
-    {
-        List<XRayMarker> markers;
-        void ApplyMaterial()
-        {
-            foreach (var rig in GorillaParent.instance.vrrigs)
-            {
-                if (rig.myPlayer.IsLocal) continue;
-
-                var marker = rig.gameObject.GetComponent<XRayMarker>();
-                if (marker)
-                    marker.Update();
-                else
-                    markers.Add(rig.gameObject.AddComponent<XRayMarker>());
-            }
-        }
-
-        void FixedUpdate()
-        {
-            if (Time.frameCount % 300 == 0) ApplyMaterial();
-        }
-        protected override void OnEnable()
-        {
-            if (!MenuController.Instance.Built) return;
-            base.OnEnable();
-            markers = new List<XRayMarker>();
-            ApplyMaterial();
-        }
-
-        protected override void Cleanup()
-        {
-            foreach (var marker in markers)
-                marker?.Obliterate();
-        }
-
-        public override string DisplayName()
-        {
-            return "ESP";
-        }
-
-        public override string Tutorial()
-        {
-            return "Effect: Allows you to see other players through walls.";
-        }
-
     }
 }

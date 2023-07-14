@@ -92,9 +92,10 @@ namespace Bark.Modules.Movement
         private bool flying = false;
         private bool gravity = true;
 
-        public static int flySpeedIndex = 2;
+        public static int flySpeedIndex = 3;
         public static float[] speeds =
         {
+            500f,
             1000f,
             1500f,
             2500f,
@@ -129,7 +130,7 @@ namespace Bark.Modules.Movement
                 if (rightHandSecondary)
                 {
                     Player.Instance.GetComponent<Rigidbody>().velocity =
-                        Player.Instance.headCollider.transform.forward * Time.deltaTime * (speeds[flySpeedIndex] / Player.Instance.scale);
+                        Player.Instance.headCollider.transform.forward * Time.deltaTime * (speeds[flySpeedIndex]);
                     flying = true;
                 }
                 else if (flying == true)

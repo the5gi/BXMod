@@ -9,10 +9,10 @@ namespace Bark.Tools
         public static ManualLogSource logger;
         public static void Init()
         {
-            logger = Logger.CreateLogSource("Bark");
+            logger = Logger.CreateLogSource("BarkX");
         }
 
-        public static void LogException(Exception e)
+        public static void Exception(Exception e)
         {
             var methodInfo = new StackTrace().GetFrame(1).GetMethod();
             logger.LogWarning($"({methodInfo.ReflectedType.Name}.{methodInfo.Name}()) " + string.Join(" ", e.Message, e.StackTrace));
@@ -36,10 +36,10 @@ namespace Bark.Tools
             logger.LogInfo($"({methodInfo.ReflectedType.Name}.{methodInfo.Name}()) " + string.Join(" ", content));
         }
 
-        public static void LogDebug(params object[] content)
+        public static void Debug(params object[] content)
         {
-            //var methodInfo = new StackTrace().GetFrame(1).GetMethod();
-            //logger.LogInfo($"*** Debug *** ({methodInfo.ReflectedType.Name}.{methodInfo.Name}()) " + string.Join(" ", content));
+            var methodInfo = new StackTrace().GetFrame(1).GetMethod();
+            logger.LogDebug($"({methodInfo.ReflectedType.Name}.{methodInfo.Name}()) " + string.Join("  ", content));
         }
     }
 }

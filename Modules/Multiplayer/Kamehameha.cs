@@ -37,7 +37,7 @@ namespace Bark.Modules.Multiplayer
                 GestureTracker.Instance.OnKamehameha += OnKamehameha;
 
             }
-            catch (Exception e) { Logging.LogException(e); }
+            catch (Exception e) { Logging.Exception(e); }
 
         }
 
@@ -78,7 +78,7 @@ namespace Bark.Modules.Multiplayer
                 yield return new WaitForEndOfFrame();
             }
             isCharging = false;
-            Logging.LogDebug("Charging is done");
+            Logging.Debug("Charging is done");
             float chargeTime = Time.time;
             while (Time.time - chargeTime < 1f)
             {
@@ -87,7 +87,7 @@ namespace Bark.Modules.Multiplayer
                 yield return new WaitForEndOfFrame();
             }
 
-            Logging.LogDebug("FIRING MY LAZER");
+            Logging.Debug("FIRING MY LAZER");
 
             bananaLine.gameObject.SetActive(true);
             isFiring = true;
@@ -117,7 +117,7 @@ namespace Bark.Modules.Multiplayer
                 Player.Instance.AddForce(direction * -40 * diameter * Time.fixedDeltaTime);
                 yield return new WaitForEndOfFrame();
             }
-            Logging.LogDebug("Firing is done");
+            Logging.Debug("Firing is done");
             orb.gameObject.SetActive(false);
             bananaLine.gameObject.SetActive(false);
             isFiring = false;

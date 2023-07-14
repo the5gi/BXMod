@@ -23,7 +23,7 @@ namespace Bark.Modules.Movement
             }
             catch (Exception e)
             {
-                Logging.LogException(e);
+                Logging.Exception(e);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Bark.Modules.Movement
             }
             catch (Exception e)
             {
-                Logging.LogException(e);
+                Logging.Exception(e);
             }
         }
         protected override void Cleanup()
@@ -84,7 +84,7 @@ namespace Bark.Modules.Movement
                 bananaGunL?.Obliterate();
                 bananaGunR?.Obliterate();
             }
-            catch (Exception e) { Logging.LogException(e); }
+            catch (Exception e) { Logging.Exception(e); }
         }
 
         protected override void OnEnable()

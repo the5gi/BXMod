@@ -78,10 +78,7 @@ namespace Bark.Modules.Multiplayer
             float closestDistance = Mathf.Infinity;
             foreach (var rig in GorillaParent.instance.vrrigs)
             {
-                if (rig.myPlayer.IsLocal)
-                {
-                    continue;
-                }
+                if (rig.gameObject.Equals(Plugin.getLocalRig().gameObject)) continue;
                 var rigTransform = rig.transform.FindChildRecursive("head");
                 float distanceToTarget = Vector3.Distance(hand.position, rigTransform.position);
 

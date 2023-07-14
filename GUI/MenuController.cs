@@ -38,7 +38,7 @@ namespace Bark.GUI
             Instance = this;
             try
             {
-                Logging.LogDebug("Awake");
+                Logging.Debug("Awake");
                 base.Awake();
 
                 var tracker = gameObject.AddComponent<GestureTracker>();
@@ -71,6 +71,7 @@ namespace Bark.GUI
 
                     //// Teleportation
                     gameObject.AddComponent<Checkpoint>(),
+                    //gameObject.AddComponent<Telekinesis>(), //to be added
                     gameObject.AddComponent<Teleport>(),
                 
                     //// Multiplayer
@@ -85,7 +86,7 @@ namespace Bark.GUI
             };
                 
             }
-            catch (Exception e) { Logging.LogException(e); }
+            catch (Exception e) { Logging.Exception(e); }
         }
 
         void FixedUpdate()
@@ -109,7 +110,7 @@ namespace Bark.GUI
 
         public void BuildMenu()
         {
-            Logging.LogDebug("Building menu...");
+            Logging.Debug("Building menu...");
             try
             {
                 helpText = this.gameObject.transform.Find("Help Canvas").GetComponentInChildren<Text>();
@@ -131,7 +132,7 @@ namespace Bark.GUI
                 ResetPosition();
 
 
-                Logging.LogDebug("Build successful.");
+                Logging.Debug("Build successful.");
             }
             catch (Exception ex) { Logging.LogWarning(ex.Message); Logging.LogWarning(ex.StackTrace); return; }
             Built = true;

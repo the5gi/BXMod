@@ -47,7 +47,7 @@ namespace Bark.Modules.Movement
                 material = ghost.GetComponent<Renderer>().material;
                 platform.gameObject.SetActive(false);
             }
-            catch (Exception e) { Logging.LogException(e); }
+            catch (Exception e) { Logging.Exception(e); }
         }
 
         public void OnGrip()

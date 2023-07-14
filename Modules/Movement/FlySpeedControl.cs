@@ -51,7 +51,7 @@ namespace Bark.Modules.Movement
 
                 if (rightTrigger)
                 {
-                    if (SuperMan.flySpeedIndex == 3)
+                    if (SuperMan.flySpeedIndex == (SuperMan.speeds.Length - 1))
                     {
                         return;
                     }

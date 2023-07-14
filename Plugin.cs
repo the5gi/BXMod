@@ -23,7 +23,7 @@ namespace Bark
         public void Setup()
         {
             if (menuController || !pluginEnabled || !inRoom) return;
-            Logging.LogDebug("Setting up");
+            Logging.Debug("Setting up");
 
             try
             {
@@ -39,7 +39,7 @@ namespace Bark
         {
             try
             {
-                Logging.LogDebug("Cleaning up");
+                Logging.Debug("Cleaning up");
                 menuController?.gameObject?.Obliterate();
             }
             catch (Exception error)
@@ -57,7 +57,7 @@ namespace Bark
         {
             try
             {
-                Logging.LogDebug("Start");
+                Logging.Debug("Start");
                 Utilla.Events.GameInitialized += OnGameInitialized;
                 assetBundle = AssetUtils.LoadAssetBundle("Bark/Resources/barkbundle");
                 monkeMenuPrefab = assetBundle.LoadAsset<GameObject>("Bark Menu");
@@ -73,7 +73,7 @@ namespace Bark
         {
             try
             {
-                Logging.LogDebug("OnEnable");
+                Logging.Debug("OnEnable");
                 this.pluginEnabled = true;
                 HarmonyPatches.ApplyHarmonyPatches();
                 if (initialized)
@@ -89,24 +89,30 @@ namespace Bark
         {
             try
             {
-                Logging.LogDebug("OnDisable");
+                Logging.Debug("OnDisable");
                 this.pluginEnabled = false;
                 HarmonyPatches.RemoveHarmonyPatches();
                 Cleanup();
             }
             catch (Exception e)
             {
-                Logging.LogException(e);
+                Logging.Exception(e);
             }
         }
 
         void OnGameInitialized(object sender, EventArgs e)
         {
-            Logging.LogDebug("OnGameInitialized");
+            Logging.Debug("OnGameInitialized");
             initialized = true;
-            Logging.LogDebug("RoomJoined");
+            Logging.Debug("RoomJoined");
             inRoom = true;
             Setup();
+        }
+
+        public static VRRig getLocalRig()
+        {
+            String rigLoc = "Global/Local VRRig/Local Gorilla Player/rig/";
+            return GameObject.Find(rigLoc).GetComponent<VRRig>();
         }
     }
 }

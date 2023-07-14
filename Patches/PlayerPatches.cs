@@ -18,7 +18,7 @@ namespace Bark.Patches
             {
                 OnLateUpdate?.Invoke(__instance);
             }
-            catch(Exception e) { Logging.LogException(e); }
+            catch(Exception e) { Logging.Exception(e); }
         }
     }
 

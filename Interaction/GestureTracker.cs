@@ -72,7 +72,7 @@ namespace Bark.Gestures
 
             try
             {
-                Logging.LogDebug("Start");
+                Logging.Debug("Start");
                 leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
                 rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
                 BuildColliders();
@@ -255,7 +255,7 @@ namespace Bark.Gestures
 
         void BuildColliders()
         {
-            Logging.LogDebug("BuildColliders");
+            Logging.Debug("BuildColliders");
 
             var player = Player.Instance;
             chest = new GameObject("Body Gesture Collider");
@@ -318,7 +318,7 @@ namespace Bark.Gestures
 
         public void OnDestroy()
         {
-            Logging.LogDebug("Gesture Tracker Destroy");
+            Logging.Debug("Gesture Tracker Destroy");
             leftHand?.Obliterate();
             rightHand?.Obliterate();
             leftPointerObj?.Obliterate();

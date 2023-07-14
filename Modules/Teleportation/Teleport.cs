@@ -35,7 +35,7 @@ namespace Bark.Modules
                 windowCollider.isTrigger = true;
                 poly = window.gameObject.AddComponent<DebugPoly>();
                 GestureTracker.Instance.OnIlluminati += OnIlluminati;
-            } catch (Exception e) { Logging.LogException(e); }
+            } catch (Exception e) { Logging.Exception(e); }
         }
 
         private void OnIlluminati()
