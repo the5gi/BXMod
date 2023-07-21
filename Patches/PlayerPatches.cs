@@ -1,11 +1,10 @@
 ﻿using HarmonyLib;
-using Bark.Modules;
 using GorillaLocomotion;
 using System;
-using Bark.Tools;
-using Bark.Modules.Physics;
+using BXMod.Modules.Physics;
+using BXMod.Tools;
 
-namespace Bark.Patches
+namespace BXMod.Patches
 {
     [HarmonyPatch(typeof(Player))]
     [HarmonyPatch("LateUpdate", MethodType.Normal)]

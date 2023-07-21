@@ -1,18 +1,13 @@
-﻿using Bark.Extensions;
-using Bark.GUI;
-using Bark.Modules;
-using Bark.Tools;
-using GorillaLocomotion;
+﻿using GorillaLocomotion;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
+using BXMod.Extensions;
+using BXMod.Tools;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-using static OVRManager;
 
-namespace Bark.Gestures
+namespace BXMod.Gestures
 {
     //TODO - Add a timeout on meat beat actions so you can't slowly accumulate them and accidentally trigger the menu
     public class GestureTracker : MonoBehaviour
@@ -27,7 +22,7 @@ namespace Bark.Gestures
 
         public BodyVectors leftHandVectors, rightHandVectors, headVectors;
 
-        public BarkInteractor
+        public BXModInteractor
             leftPalmInteractor, rightPalmInteractor,
             leftPointerInteractor, rightPointerInteractor;
 
@@ -292,10 +287,10 @@ namespace Bark.Gestures
             rightThumbTransform = GameObject.Find(string.Format(thumbPath, "R")).transform;
         }
 
-        public BarkInteractor CreateInteractor(string name, Transform parent, float scale)
+        public BXModInteractor CreateInteractor(string name, Transform parent, float scale)
         {
             var obj = new GameObject(name);
-            var interactor = obj.AddComponent<BarkInteractor>();
+            var interactor = obj.AddComponent<BXModInteractor>();
             obj.transform.SetParent(parent, false);
             obj.transform.localScale = Vector3.one * scale;
             return interactor;

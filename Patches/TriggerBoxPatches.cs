@@ -1,9 +1,8 @@
-﻿using Bark.Modules.Physics;
-using Bark.Tools;
+﻿using BXMod.Tools;
 using GorillaNetworking;
 using HarmonyLib;
 
-namespace Bark.Patches
+namespace BXMod.Patches
 {
     internal class TriggerBoxPatches
     {

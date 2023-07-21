@@ -1,7 +1,8 @@
 ﻿using Bark.Tools;
+using BXMod.Tools;
 using UnityEngine;
 
-namespace Bark.Extensions
+namespace BXMod.Extensions
 {
     public static class GameObjectExtensions
     {

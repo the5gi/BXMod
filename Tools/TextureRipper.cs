@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Text;
+using BXMod.Extensions;
 using UnityEngine;
-using Bark.Extensions;
 
-namespace Bark.Tools
+namespace BXMod.Tools
 {
     public static class TextureRipper
     {

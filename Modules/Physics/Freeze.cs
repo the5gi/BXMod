@@ -1,10 +1,8 @@
-﻿using Bark.GUI;
-using GorillaLocomotion;
-using UnityEngine;
+﻿using BXMod.GUI;
 
-namespace Bark.Modules.Physics
+namespace BXMod.Modules.Physics
 {
-    public class Freeze : BarkModule
+    public class Freeze : BXModule
     {
         protected override void OnEnable()
         {

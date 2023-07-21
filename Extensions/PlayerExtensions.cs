@@ -2,7 +2,7 @@
 using GorillaLocomotion;
 using UnityEngine;
 
-namespace Bark.Extensions
+namespace BXMod.Extensions
 {
     public static class PlayerExtensions
     {

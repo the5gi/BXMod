@@ -1,13 +1,13 @@
-﻿using Bark.GUI;
-using Bark.Gestures;
-using Bark.Patches;
-using Bark.Modules.Physics;
+﻿using BXMod.Gestures;
+using BXMod.GUI;
+using BXMod.Modules.Physics;
+using BXMod.Patches;
 using GorillaLocomotion;
 using UnityEngine;
 
-namespace Bark.Modules.Multiplayer
+namespace BXMod.Modules.Multiplayer
 {
-    public class Piggyback : BarkModule
+    public class Piggyback : BXModule
     {
         public static bool mounted;
         private Transform mount;

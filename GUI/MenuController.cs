@@ -4,18 +4,16 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
-using Bark.Gestures;
-using Bark.Modules;
-using Bark.Modules.Misc;
-using Bark.Modules.Movement;
-using Bark.Modules.Physics;
-using Bark.Modules.Multiplayer;
-using Bark.Modules.Teleportation;
-using Bark.Tools;
-using Photon.Pun;
+using BXMod.Gestures;
+using BXMod.Modules;
+using BXMod.Modules.Misc;
+using BXMod.Modules.Movement;
+using BXMod.Modules.Multiplayer;
+using BXMod.Modules.Physics;
+using BXMod.Tools;
 using Player = GorillaLocomotion.Player;
 
-namespace Bark.GUI
+namespace BXMod.GUI
 {
     public class MenuController : XRGrabInteractable
     {
@@ -30,7 +28,7 @@ namespace Bark.GUI
         public Rigidbody _rigidbody;
         private List<Transform> pages;
         private List<ButtonController> buttons;
-        private List<BarkModule> modules;
+        private List<BXModule> modules;
         public Text helpText;
 
         protected override void Awake()
@@ -50,29 +48,20 @@ namespace Bark.GUI
                         ResetPosition();
                 };
 
-                modules = new List<BarkModule>()
+                modules = new List<BXModule>()
                 {
                     // Locomotion
                     //SuperMan was something i modified to have better flying
                     gameObject.AddComponent<SuperMan>(),
                     gameObject.AddComponent<FlySpeedControl>(),
-                    gameObject.AddComponent<GrapplingHooks>(),
                     gameObject.AddComponent<Speed>(),
+                    gameObject.AddComponent<Testing>(),
                     gameObject.AddComponent<Platforms>().Left(),
                     gameObject.AddComponent<Platforms>().Right(),
-
-                    //// Physics
-                    gameObject.AddComponent<Freeze>(),
-                    //Removed, Will change
-                    gameObject.AddComponent<LowGravity>(),
                     gameObject.AddComponent<NoCollide>(),
                     gameObject.AddComponent<NoSlip>(),
                     gameObject.AddComponent<SlipperyHands>(),
-
-                    //// Teleportation
-                    gameObject.AddComponent<Checkpoint>(),
                     //gameObject.AddComponent<Telekinesis>(), //to be added
-                    gameObject.AddComponent<Teleport>(),
                 
                     //// Multiplayer
                     gameObject.AddComponent<Boxing>(),
@@ -81,8 +70,8 @@ namespace Bark.GUI
 
                     //Custom
                     gameObject.AddComponent<Disconnect>(),
-                    gameObject.AddComponent<Invisible>(),
                     gameObject.AddComponent<FirstPersonCamera>(),
+                    gameObject.AddComponent<WaterBoost>()
             };
                 
             }
@@ -114,10 +103,10 @@ namespace Bark.GUI
             try
             {
                 helpText = this.gameObject.transform.Find("Help Canvas").GetComponentInChildren<Text>();
-                helpText.text = "BarkX by 5gi, Enabled a module to see it's effects.";
+                helpText.text = "BXMod by 5gi, Enabled a module to see it's effects.";
                 this.gameObject.transform.Find("Version Canvas").GetComponentInChildren<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
                 this.gameObject.transform.Find("Version Canvas").GetComponentInChildren<Text>().text =
-                    "BarkX by 5gi";
+                    "BXMod by 5gi";
 
                 var collider = this.gameObject.AddComponent<BoxCollider>();
                 _rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -253,7 +242,7 @@ namespace Bark.GUI
             this.retainTransformParent = false;
             this.throwOnDetach = true;
             this.interactionLayerMask = LayerMask.GetMask("Water");
-            this.interactionManager = BarkInteractor.manager;
+            this.interactionManager = BXModInteractor.manager;
             this.onSelectExited.AddListener((args) =>
             {
                 GetComponent<Rigidbody>().isKinematic = false;

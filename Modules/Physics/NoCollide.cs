@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections;
-using Bark.GUI;
-using Bark.Patches;
-using Bark.Tools;
-using GorillaLocomotion;
+﻿using BXMod.GUI;
 using UnityEngine;
-using Bark.Modules.Multiplayer;
-using Bark.Modules.Movement;
 using UnityEngine.XR;
 
-namespace Bark.Modules.Physics
+namespace BXMod.Modules.Physics
 {
-    public class NoCollide : BarkModule
+    public class NoCollide : BXModule
     {
         private bool leftTriggerDown = false;
         private bool noClipOn = false;
@@ -22,14 +15,8 @@ namespace Bark.Modules.Physics
                 InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
                 bool leftTrigger;
                 bool temp2 = leftController.TryGetFeatureValue(CommonUsages.triggerButton, out leftTrigger);
-                if (leftTriggerDown && leftTrigger)
-                {
-                    return;
-                }
-                else if (leftTriggerDown && !leftTrigger)
-                {
-                    leftTriggerDown = false;
-                }
+                if (leftTriggerDown && leftTrigger) return;
+                if (leftTriggerDown && !leftTrigger) leftTriggerDown = false;
 
                 if (leftTrigger && !noClipOn)
                 {

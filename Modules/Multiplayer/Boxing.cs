@@ -1,90 +1,87 @@
-﻿using Bark.Extensions;
-using Bark.GUI;
-using Bark.Tools;
-using GorillaLocomotion;
+﻿using GorillaLocomotion;
 using System;
 using System.Collections.Generic;
+using BXMod.Extensions;
+using BXMod.Gestures;
+using BXMod.GUI;
+using BXMod.Tools;
 using UnityEngine;
 
-namespace Bark.Modules.Multiplayer
+namespace BXMod.Modules.Multiplayer
 {
 
     public class BoxingMarker : MonoBehaviour { }
 
-    public class Boxing : BarkModule
+    public class Boxing : BXModule
     {
-        public float forceMultiplier = 100f;
+        public float forceMultiplier = 50;
         private PunchTracker tracker;
         private Collider punchCollider;
         private List<GameObject> gloves = new List<GameObject>();
         private List<BoxingMarker> markers = new List<BoxingMarker>();
 
-        public class PunchTracker
+        private class PunchTracker
         {
             public Collider collider;
             public Vector3 lastPos;
-            public int punchFrame = 0;
         }
 
         void CreateGloves()
         {
-            try
+
+            foreach (var rig in GorillaParent.instance.vrrigs)
             {
-                foreach (var rig in GorillaParent.instance.vrrigs)
+                try
                 {
-                    if (rig.gameObject.Equals(Plugin.getLocalRig().gameObject) ||
+                    if (Plugin.isMyRig(rig) ||
                         rig.gameObject.GetComponent<BoxingMarker>()) continue;
 
                     markers.Add(rig.gameObject.AddComponent<BoxingMarker>());
                     gloves.Add(CreateGlove(rig.leftHandTransform));
                     gloves.Add(CreateGlove(rig.rightHandTransform, false));
                 }
+                catch (Exception e)
+                {
+                    Logging.Exception(e);
+                }
             }
-            catch (Exception e)
-            {
-                Logging.Exception(e);
-            }
+
         }
 
         private GameObject CreateGlove(Transform parent, bool isLeft = true)
         {
-            var glove = Instantiate(Plugin.assetBundle.LoadAsset<GameObject>("Boxing Glove"));
+            var glove = Instantiate(Plugin.assetBundle.LoadAsset<GameObject>("Boxing Glove"), parent, false);
             string side = isLeft ? "Left" : "Right";
             glove.name = $"Boxing Glove ({side})";
-            glove.transform.SetParent(parent, false);
             float x = isLeft ? 1 : -1;
             glove.transform.localScale = new Vector3(x, 1, 1);
-            glove.layer = 4;
+            glove.layer = BXModInteractor.InteractionLayer;
             foreach (Transform child in glove.transform)
-                child.gameObject.layer = 4;
+                child.gameObject.layer = BXModInteractor.InteractionLayer;
             return glove;
         }
 
         void FixedUpdate()
         {
             if (Time.frameCount % 300 == 0) CreateGloves();
-
-            if (!(tracker is null) && Time.frameCount - tracker.punchFrame > 5)
-            {
-                DoPunch();
-            }
-
         }
 
         private void DoPunch()
         {
-            Vector3 force = (tracker.collider.transform.position - tracker.lastPos) * forceMultiplier;
-            if (force.magnitude > 20) force = force.normalized * 20;
+            Vector3 force = (tracker.collider.transform.position - tracker.lastPos);
+            if (force.magnitude > 1)
+                force.Normalize();
+            force *= forceMultiplier;
             Player.Instance.bodyCollider.attachedRigidbody.velocity += force;
-            tracker.punchFrame = Time.frameCount;
+            tracker = null;
         }
 
         private void RegisterTracker(Collider collider)
         {
-            tracker = new PunchTracker()
+            tracker = new PunchTracker
             {
                 collider = collider,
-                lastPos = collider.transform.position + Vector3.zero
+                lastPos = collider.transform.position
             };
         }
 
@@ -94,29 +91,24 @@ namespace Bark.Modules.Multiplayer
             base.OnEnable();
             try
             {
+                ReloadConfiguration();
                 var capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                capsule.name = "MonkeMenuPunchDetector";
+                capsule.name = "BarkPunchDetector";
                 capsule.transform.SetParent(Player.Instance.bodyCollider.transform, false);
-                capsule.layer = 4;
+                capsule.layer = BXModInteractor.InteractionLayer;
                 capsule.GetComponent<MeshRenderer>().enabled = false;
 
                 punchCollider = capsule.GetComponent<Collider>();
                 punchCollider.isTrigger = true;
-                punchCollider.transform.localScale *= .75f;
+                punchCollider.transform.localScale = new Vector3(.5f, .35f, .5f);
+                punchCollider.transform.localPosition += new Vector3(0, .3f, 0);
 
                 var observer = capsule.AddComponent<CollisionObserver>();
                 observer.OnTriggerEntered += (obj, collider) =>
                 {
                     if (collider.name != "MM Glove" || collider == tracker?.collider) return;
                     RegisterTracker(collider);
-                };
-
-                observer.OnTriggerExited += (obj, collider) =>
-                {
-                    Logging.Debug(collider.name);
-                    if (collider.name != "MM Glove") return;
-                    if (collider == tracker.collider)
-                        tracker = null;
+                    Invoke(nameof(DoPunch), 0.1f);
                 };
 
                 CreateGloves();
@@ -138,6 +130,11 @@ namespace Bark.Modules.Multiplayer
             {
                 m?.Obliterate();
             }
+        }
+
+        protected override void ReloadConfiguration()
+        {
+            forceMultiplier = (50f);
         }
 
         public override string DisplayName()

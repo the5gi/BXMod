@@ -1,8 +1,9 @@
-﻿using Bark.GUI;
-using Bark.Patches;
-namespace Bark.Modules.Physics
+﻿using BXMod.GUI;
+using BXMod.Patches;
+
+namespace BXMod.Modules.Physics
 {
-    public class NoSlip: BarkModule
+    public class NoSlip: BXModule
     {
         public static NoSlip Instance;
 

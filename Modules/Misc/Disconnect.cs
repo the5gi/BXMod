@@ -1,14 +1,9 @@
-﻿using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
-using Photon.Pun;
-using System;
-using UnityEngine;
+﻿using Photon.Pun;
+using BXMod.GUI;
 
-namespace Bark.Modules.Misc
+namespace BXMod.Modules.Misc
 {
-    public class Disconnect : BarkModule
+    public class Disconnect : BXModule
     {
         protected override void OnEnable()
         {

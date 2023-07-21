@@ -1,9 +1,9 @@
-﻿using Bark.GUI;
+﻿using BXMod.GUI;
 using GorillaLocomotion;
 
-namespace Bark.Modules
+namespace BXMod.Modules
 {
-    public class Speed : BarkModule
+    public class Speed : BXModule
     {
         public static float baseVelocityLimit, scale;
         public float _scale = 1.25f;

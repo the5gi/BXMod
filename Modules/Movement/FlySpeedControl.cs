@@ -1,14 +1,9 @@
-﻿using GorillaLocomotion;
-using Bark.Tools;
-using UnityEngine;
-using System.Reflection;
-using Bark.Modules.Physics;
-using Bark.GUI;
+﻿using BXMod.GUI;
 using UnityEngine.XR;
 
-namespace Bark.Modules.Movement
+namespace BXMod.Modules.Movement
 {
-    public class FlySpeedControl : BarkModule
+    public class FlySpeedControl : BXModule
     {
 
         private bool leftTriggerDown = false;

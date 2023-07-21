@@ -1,12 +1,11 @@
-﻿using GorillaLocomotion;
-using Bark.GUI;
+﻿using BXMod.GUI;
+using GorillaLocomotion;
 using UnityEngine;
 using UnityEngine.XR;
-using Bark.Modules.Physics;
 
-namespace Bark.Modules.Movement
+namespace BXMod.Modules.Movement
 {
-    public class SuperMan : BarkModule
+    public class SuperMan : BXModule
     {
         /*float speedScale = 25f, acceleration = .2f;
 
@@ -92,14 +91,18 @@ namespace Bark.Modules.Movement
         private bool flying = false;
         private bool gravity = true;
 
-        public static int flySpeedIndex = 3;
+        public static int flySpeedIndex = 5;
         public static float[] speeds =
         {
+            50,
+            250f,
             500f,
             1000f,
             1500f,
             2500f,
             3500f,
+            4500f,
+            5500f,
         };
 
         private bool leftSecondaryFrameDown = false;
@@ -130,13 +133,12 @@ namespace Bark.Modules.Movement
                 if (rightHandSecondary)
                 {
                     Player.Instance.GetComponent<Rigidbody>().velocity =
-                        Player.Instance.headCollider.transform.forward * Time.deltaTime * (speeds[flySpeedIndex]);
+                        Player.Instance.headCollider.transform.forward * (Time.deltaTime * (speeds[flySpeedIndex]));
                     flying = true;
                 }
                 else if (flying == true)
                 {
-                    Player.Instance.GetComponent<Rigidbody>().velocity =
-                        Player.Instance.headCollider.transform.forward * Time.deltaTime * 0f;
+                    Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     flying = false;
                 }
 

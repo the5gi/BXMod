@@ -1,14 +1,16 @@
-﻿using Bark.Extensions;
-using Bark.GUI;
-using Bark.Tools;
+﻿
 using System;
 using System.Collections.Generic;
+using BXMod.Extensions;
+using BXMod.GUI;
+using BXMod.Tools;
 using UnityEngine;
+using UnityEngine.XR;
 
-namespace Bark.Modules.Multiplayer
+namespace BXMod.Modules.Multiplayer
 {
 
-    public class XRay : BarkModule
+    public class XRay : BXModule
     {
         public static readonly string displayName = "ESP";
         List<XRayMarker> markers;
@@ -16,13 +18,15 @@ namespace Bark.Modules.Multiplayer
         {
             foreach (var rig in GorillaParent.instance.vrrigs)
             {
+                if (Plugin.isMyRig(rig)) continue;
                 try
                 {
                     var marker = rig.gameObject.GetComponent<XRayMarker>();
-                    if (marker)
-                        marker.Update();
+                    if (marker) marker.Update();
                     else
+                    {
                         markers.Add(rig.gameObject.AddComponent<XRayMarker>());
+                    }
                 }
                 catch (Exception e)
                 {
@@ -68,18 +72,29 @@ namespace Bark.Modules.Multiplayer
         void Start()
         {
             rig = GetComponent<VRRig>();
+            if (Plugin.isMyRig(rig)) this.Obliterate();
             material = Instantiate(Plugin.assetBundle.LoadAsset<Material>("X-Ray Material"));
             Update();
         }
 
         public void Update()
         {
+            InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+            bool leftPrimary;
+            bool temp2 = leftController.TryGetFeatureValue(CommonUsages.primaryButton, out leftPrimary);
+            if (rig.mainSkin.material.name.Contains("X-Ray") && leftPrimary)
+            {
+                rig.mainSkin.material = baseMaterial;
+                return;
+            }
+
             if (!rig.mainSkin.material.name.Contains("X-Ray"))
             {
                 baseMaterial = rig.mainSkin.material;
 
-                if (rig.mainSkin.material.name.Contains("infected")) {
-                    material.color = new Color(0.18039215686f, 0.03529411764f, 0.03529411764f); 
+                if (rig.mainSkin.material.name.Contains("infected"))
+                {
+                    material.color = new Color(0.18039215686f, 0.03529411764f, 0.03529411764f);
                 }
                 else
                 {

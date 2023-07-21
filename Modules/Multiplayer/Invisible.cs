@@ -1,33 +1,29 @@
-﻿using Bark.GUI;
+﻿using BXMod.GUI;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace Bark.Modules.Misc
+namespace BXMod.Modules.Misc
 {
-    internal class Invisible : BarkModule
+    internal class Invisible : BXModule
     {
         protected override void OnEnable()
         {
             if (!MenuController.Instance.Built) return;
             base.OnEnable();
         }
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-        }
 
 
         void FixedUpdate()
         {
-            if (this.enabled == true)
+            if (this.enabled)
             {
                 InputDevice rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
-                bool rightHandTrigger = false;
-                bool tempState = rightController.TryGetFeatureValue(CommonUsages.triggerButton, out rightHandTrigger);
+                bool rightHandTrigger;
+                rightController.TryGetFeatureValue(CommonUsages.triggerButton, out rightHandTrigger);
                 if (rightHandTrigger)
                 {
-                    GorillaTagger.Instance.myVRRig.transform.position = new Vector3(1050f, 1050f, 1050f);
-                    GorillaTagger.Instance.myVRRig.enabled = false;
+                    Plugin.getLocalRig().transform.position = new Vector3(1050f, 1050f, 1050f);
+                    Plugin.getLocalRig().enabled = false;
                 }
                 else
                 {

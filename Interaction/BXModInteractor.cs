@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using Bark.Tools;
+using BXMod.Tools;
 
-namespace Bark.Gestures
+namespace BXMod.Gestures
 {
-    public class BarkInteractor : XRDirectInteractor
+    public class BXModInteractor : XRDirectInteractor
     {
         public static XRInteractionManager manager;
         public static string InteractionLayerName = "TransparentFX";

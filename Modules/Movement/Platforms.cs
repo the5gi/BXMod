@@ -1,16 +1,15 @@
 ﻿using GorillaLocomotion;
-using Bark.Tools;
 using System;
+using BXMod.Extensions;
+using BXMod.Gestures;
+using BXMod.GUI;
 using UnityEngine;
 using UnityEngine.XR;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Modules.Physics;
+using BXMod.Tools;
 
-namespace Bark.Modules.Movement
+namespace BXMod.Modules.Movement
 {
-    public class Platforms : BarkModule
+    public class Platforms : BXModule
     {
         public GameObject platform, ghost;
         private XRNode xrNode;
@@ -88,10 +87,9 @@ namespace Bark.Modules.Movement
             return this;
         }
 
-        void FixedUpdate()
+        void Update()
         {
-            float transparency = (Time.time - spawnTime) / 1f;
-            material.color = new Color(1, 1, 1, Mathf.Lerp(1, 0, transparency));
+            material.color = new Color(1, 1, 1);
         }
 
         protected override void Cleanup()

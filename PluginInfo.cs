@@ -1,4 +1,4 @@
-﻿namespace Bark
+﻿namespace BXMod
 {
     /// <summary>
     /// This class is used to provide information about your mod to BepInEx.
@@ -6,7 +6,7 @@
     internal class PluginInfo
     {
         public const string GUID = "com.kylethescientist.gorillatag.bark";
-        public const string Name = "BarkX";
+        public const string Name = "BXMod";
         public const string Version = "10.0.0";
     }
 }

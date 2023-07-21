@@ -1,9 +1,9 @@
-﻿using Bark.Modules;
+﻿using BXMod.Modules;
 using UnityEngine;
 
-namespace Bark.GUI
+namespace BXMod.GUI
 {
-    internal class FirstPersonCamera : BarkModule
+    internal class FirstPersonCamera : BXModule
     {
         GameObject sCamera = GameObject.Find("Shoulder Camera");
 

@@ -1,11 +1,12 @@
-﻿using Bark.Gestures;
+﻿
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using Bark;
-using Bark.Tools;
+using BXMod;
+using BXMod.Gestures;
+using BXMod.Tools;
 
 public class ButtonController : XRBaseInteractable
 {
@@ -59,7 +60,7 @@ public class ButtonController : XRBaseInteractable
         {
             buttonModel = transform.GetChild(0);
             this.material = buttonModel.GetComponent<Renderer>().material;
-            this.interactionManager = BarkInteractor.manager;
+            this.interactionManager = BXModInteractor.manager;
             this.interactionLayerMask = LayerMask.GetMask("Water");
             this.gameObject.layer = 4;
             this.text = GetComponentInChildren<Text>();

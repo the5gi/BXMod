@@ -1,6 +1,6 @@
-﻿using Bark;
-using Bark.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using BXMod;
+using BXMod.Extensions;
 using UnityEngine;
 
 public class ColliderRenderer : MonoBehaviour

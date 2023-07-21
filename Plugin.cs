@@ -1,12 +1,14 @@
 ﻿using BepInEx;
 using System;
+using BXMod.Extensions;
+using BXMod.GUI;
+using BXMod.Tools;
 using UnityEngine;
 using Utilla;
-using Bark.GUI;
-using Bark.Tools;
-using Bark.Extensions;
+using GorillaLocomotion;
+using UnityEngine.Rendering;
 
-namespace Bark
+namespace BXMod
 {
     [ModdedGamemode]
     [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
@@ -22,6 +24,8 @@ namespace Bark
 
         public void Setup()
         {
+            getLocalRig().mainSkin.shadowCastingMode = ShadowCastingMode.On;
+            getLocalRig().mainSkin.receiveShadows = true;
             if (menuController || !pluginEnabled || !inRoom) return;
             Logging.Debug("Setting up");
 
@@ -59,7 +63,7 @@ namespace Bark
             {
                 Logging.Debug("Start");
                 Utilla.Events.GameInitialized += OnGameInitialized;
-                assetBundle = AssetUtils.LoadAssetBundle("Bark/Resources/barkbundle");
+                assetBundle = AssetUtils.LoadAssetBundle("BXMod/Resources/barkbundle");
                 monkeMenuPrefab = assetBundle.LoadAsset<GameObject>("Bark Menu");
             }
             catch (Exception e)
@@ -111,8 +115,19 @@ namespace Bark
 
         public static VRRig getLocalRig()
         {
-            String rigLoc = "Global/Local VRRig/Local Gorilla Player/rig/";
+            String rigLoc = "Global/Local VRRig/Local Gorilla Player/";
             return GameObject.Find(rigLoc).GetComponent<VRRig>();
+        }
+
+        public static Player getLocalPlayer()
+        {
+            String playLoc = "Player VR Controller/GorillaPlayer/";
+            return GameObject.Find(playLoc).GetComponent<Player>();
+        }
+
+        public static bool isMyRig(VRRig rig)
+        {
+            return getLocalRig().leftHandTransform.position == rig.leftHandTransform.position;
         }
     }
 }

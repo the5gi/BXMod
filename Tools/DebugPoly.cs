@@ -4,7 +4,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Bark.Tools
+namespace BXMod.Tools
 {
     public class DebugPoly : MonoBehaviour
     {

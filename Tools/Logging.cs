@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Bark.Tools
+namespace BXMod.Tools
 {
     public static class Logging
     {

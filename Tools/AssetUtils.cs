@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using System.Reflection;
 
-namespace Bark
+namespace BXMod
 {
     public static class AssetUtils
     {

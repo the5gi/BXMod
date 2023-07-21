@@ -5,9 +5,8 @@ using GorillaLocomotion;
 using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
-using Bark.Modules.Physics;
 
-namespace Bark.Patches
+namespace BXMod.Patches
 {
     [HarmonyPatch(typeof(Player))]
     [HarmonyPatch("LateUpdate", MethodType.Normal)]

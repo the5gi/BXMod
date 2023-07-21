@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Bark.Tools
+namespace BXMod.Tools
 {
     public class DebugRay : MonoBehaviour
     {

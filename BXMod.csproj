@@ -3,6 +3,7 @@
   <PropertyGroup>
 	  <TargetFramework>netstandard2.0</TargetFramework>
 	  <OutputType>Library</OutputType>
+	  <RootNamespace>Bark</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,9 +19,6 @@
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>deps\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="0Harmony20">
-      <HintPath>deps\0Harmony20.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>deps\Assembly-CSharp.dll</HintPath>

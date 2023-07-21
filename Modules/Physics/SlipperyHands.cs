@@ -1,9 +1,9 @@
-﻿using Bark.GUI;
-using Bark.Patches;
+﻿using BXMod.GUI;
+using BXMod.Patches;
 
-namespace Bark.Modules.Physics
+namespace BXMod.Modules.Physics
 {
-    public class SlipperyHands : BarkModule
+    public class SlipperyHands : BXModule
     {
         public static SlipperyHands Instance;
 

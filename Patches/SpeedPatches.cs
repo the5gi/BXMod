@@ -1,9 +1,7 @@
-﻿using HarmonyLib;
-using Bark.Modules.Movement;
-using Bark.Modules;
-using Bark.Tools;
+﻿using BXMod.Modules;
+using HarmonyLib;
 
-namespace Bark.Patches
+namespace BXMod.Patches
 {
     [HarmonyPatch(typeof(GorillaTagManager))]
     [HarmonyPatch("LocalPlayerSpeed", MethodType.Normal)]

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Bark.Modules
+namespace BXMod.Modules
 {
-    public abstract class BarkModule : MonoBehaviour
+    public abstract class BXModule : MonoBehaviour
     {
         protected virtual void ReloadConfiguration() { }
 
