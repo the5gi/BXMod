@@ -67,7 +67,7 @@ namespace BXMod.GUI
                     gameObject.AddComponent<Boxing>(),
                     gameObject.AddComponent<Piggyback>(),
                     gameObject.AddComponent<XRay>(),
-
+                    gameObject.AddComponent<Invisible>(),
                     //Custom
                     gameObject.AddComponent<Disconnect>(),
                     gameObject.AddComponent<FirstPersonCamera>(),

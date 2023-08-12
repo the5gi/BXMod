@@ -63,7 +63,7 @@ namespace BXMod
             {
                 Logging.Debug("Start");
                 Utilla.Events.GameInitialized += OnGameInitialized;
-                assetBundle = AssetUtils.LoadAssetBundle("BXMod/Resources/barkbundle");
+                assetBundle = AssetUtils.LoadAssetBundle("Bark/Resources/barkbundle");
                 monkeMenuPrefab = assetBundle.LoadAsset<GameObject>("Bark Menu");
             }
             catch (Exception e)

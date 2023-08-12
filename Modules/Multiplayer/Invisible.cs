@@ -22,12 +22,15 @@ namespace BXMod.Modules.Misc
                 rightController.TryGetFeatureValue(CommonUsages.triggerButton, out rightHandTrigger);
                 if (rightHandTrigger)
                 {
-                    Plugin.getLocalRig().transform.position = new Vector3(1050f, 1050f, 1050f);
-                    Plugin.getLocalRig().enabled = false;
+                    //getLocalRig().transform.position = new Vector3(1050f, 1050f, 1050f);
+                    //Plugin.getLocalRig().enabled = false;
+                    GorillaTagger.Instance.myVRRig.transform.position = new Vector3(1050f, 1050f, 1050f);
+                    GorillaTagger.Instance.myVRRig.enabled = false;
                 }
                 else
                 {
                     GorillaTagger.Instance.myVRRig.enabled = true;
+                    //Plugin.getLocalRig().enabled = true;
                 }
             }
         }
