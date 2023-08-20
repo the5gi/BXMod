@@ -7,13 +7,11 @@ using UnityEngine;
 using Utilla;
 using GorillaLocomotion;
 using UnityEngine.Rendering;
-
 namespace BXMod
 {
     [ModdedGamemode]
     [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
-
     public class Plugin : BaseUnityPlugin
     {
         public static bool initialized, inRoom;
@@ -21,7 +19,6 @@ namespace BXMod
         public static AssetBundle assetBundle;
         public static MenuController menuController;
         public static GameObject monkeMenuPrefab;
-
         public void Setup()
         {
             getLocalRig().mainSkin.shadowCastingMode = ShadowCastingMode.On;
@@ -38,7 +35,6 @@ namespace BXMod
                 Logging.LogFatal(error, error.StackTrace);
             }
         }
-
         public void Cleanup()
         {
             try
@@ -51,19 +47,17 @@ namespace BXMod
                 Logging.LogFatal(error, error.StackTrace);
             }
         }
-
         void Awake()
         {
             Logging.Init();
         }
-
         void Start()
         {
             try
             {
                 Logging.Debug("Start");
                 Utilla.Events.GameInitialized += OnGameInitialized;
-                assetBundle = AssetUtils.LoadAssetBundle("Bark/Resources/barkbundle");
+                assetBundle = AssetUtils.LoadAssetBundle("BXMod/Resources/barkbundle");
                 monkeMenuPrefab = assetBundle.LoadAsset<GameObject>("Bark Menu");
             }
             catch (Exception e)
@@ -71,8 +65,6 @@ namespace BXMod
                 Logging.LogFatal(e, e.StackTrace);
             }
         }
-
-
         void OnEnable()
         {
             try
@@ -103,7 +95,6 @@ namespace BXMod
                 Logging.Exception(e);
             }
         }
-
         void OnGameInitialized(object sender, EventArgs e)
         {
             Logging.Debug("OnGameInitialized");
@@ -112,19 +103,16 @@ namespace BXMod
             inRoom = true;
             Setup();
         }
-
         public static VRRig getLocalRig()
         {
-            String rigLoc = "Global/Local VRRig/Local Gorilla Player/";
+            String rigLoc = "Player Objects/Local VRRig/Local Gorilla Player/";
             return GameObject.Find(rigLoc).GetComponent<VRRig>();
         }
-
         public static Player getLocalPlayer()
         {
-            String playLoc = "Player VR Controller/GorillaPlayer/";
+            String playLoc = "Player Objects/Player VR Controller/GorillaPlayer/";
             return GameObject.Find(playLoc).GetComponent<Player>();
         }
-
         public static bool isMyRig(VRRig rig)
         {
             return getLocalRig().leftHandTransform.position == rig.leftHandTransform.position;
